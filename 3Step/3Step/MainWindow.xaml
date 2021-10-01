@@ -21,8 +21,8 @@
         <Button x:Name="Delete_Client" Content="Удалить клиента" HorizontalAlignment="Center" Margin="0,49,0,0" VerticalAlignment="Top" Height="34" Width="140" Click="Delete_Client_Click"/>
         <Button x:Name="Add_Ride" Content="Добавить поездку" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top" Height="34" Width="140" Click="Add_Ride_Click"/>
         <Button x:Name="Delete_Ride" Content="Удалить поездку" HorizontalAlignment="Center" Margin="0,127,0,0" VerticalAlignment="Top" Height="34" Width="140" Click="Delete_Ride_Click"/>
-        <TextBox x:Name="ClientId_TextBox" HorizontalAlignment="Left" Margin="40,0,0,62" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
-        <TextBox x:Name="Price_TextBox" HorizontalAlignment="Left" Margin="40,0,0,39" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
+        <TextBox x:Name="ClientId_TextBox" HorizontalAlignment="Left" Margin="40,0,0,62" Text="Id" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120" PreviewKeyDown="ClientId_TextBox_PreviewKeyDown" PreviewTextInput="ClientId_TextBox_PreviewTextInput"/>
+        <TextBox x:Name="Price_TextBox" HorizontalAlignment="Left" Margin="40,0,0,39" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120" PreviewKeyDown="Price_TextBox_PreviewKeyDown" PreviewTextInput="Price_TextBox_PreviewTextInput" Text="Price"/>
         <DatePicker x:Name="DatePick" HorizontalAlignment="Left" Margin="50,0,0,10" Height="24" VerticalAlignment="Bottom"/>
         <Button x:Name="Save_file" Content="Сохранить" HorizontalAlignment="Center" Margin="0,166,0,0" VerticalAlignment="Top" Height="32" Width="140" Click="Save_file_Click"/>
         <Button x:Name="Load_file" Content="Загрузить" HorizontalAlignment="Center" Margin="0,203,0,0" VerticalAlignment="Top" Height="34" Width="140" Click="Load_file_Click"/>
