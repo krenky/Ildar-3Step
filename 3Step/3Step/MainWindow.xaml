@@ -1,0 +1,28 @@
+﻿<Window x:Class="_3Step.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3Step"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="DataClient" Grid.Column="1" SelectionChanged="DataClient_SelectionChanged"/>
+        <DataGrid x:Name="DataRide" Grid.Column="2"/>
+        <Button x:Name="Add_Client" Content="Добавить клиента" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Height="34" Width="140" Click="Add_Client_Click"/>
+        <Button x:Name="Delete_Client" Content="Удалить клиента" HorizontalAlignment="Center" Margin="0,49,0,0" VerticalAlignment="Top" Height="34" Width="140" Click="Delete_Client_Click"/>
+        <Button x:Name="Add_Ride" Content="Добавить поездку" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top" Height="34" Width="140" Click="Add_Ride_Click"/>
+        <Button x:Name="Delete_Ride" Content="Удалить поездку" HorizontalAlignment="Center" Margin="0,127,0,0" VerticalAlignment="Top" Height="34" Width="140" Click="Delete_Ride_Click"/>
+        <TextBox x:Name="ClientId_TextBox" HorizontalAlignment="Left" Margin="40,217,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Price_TextBox" HorizontalAlignment="Left" Margin="40,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="DatePick" HorizontalAlignment="Left" Margin="50,263,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

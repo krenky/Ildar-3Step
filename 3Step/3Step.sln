@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3Step", "3Step\3Step.csproj", "{D94B9C69-F176-4353-9C2E-68A3555AA0EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D94B9C69-F176-4353-9C2E-68A3555AA0EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D94B9C69-F176-4353-9C2E-68A3555AA0EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D94B9C69-F176-4353-9C2E-68A3555AA0EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D94B9C69-F176-4353-9C2E-68A3555AA0EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {791AABCE-40BF-411E-866F-36B6B65BB7A3}
+	EndGlobalSection
+EndGlobal
