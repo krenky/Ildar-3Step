@@ -53,7 +53,7 @@ namespace _3Step
         private void Delete_Client_Click(object sender, RoutedEventArgs e)
         {
             _clients.DeleteClient();
-            observClients.Remove(observClients.LastOrDefault());
+            observClients.Remove(observClients.FirstOrDefault());
         }
         /// <summary>
         /// добавления поездки
@@ -75,9 +75,12 @@ namespace _3Step
         private void DataClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Client client = DataClient.SelectedItem as Client;
-            client = _clients.FindClient(client.ClientId);
-            //DataRide.ItemsSource = client.observableCollectionRide;
-            DataRide.ItemsSource = client.GetRides();
+            if (client != null)
+            {
+                client = _clients.FindClient(client.ClientId);
+                //DataRide.ItemsSource = client.observableCollectionRide;
+                DataRide.ItemsSource = client.GetRides();
+            }
         }
         /// <summary>
         /// Удаление поездки
