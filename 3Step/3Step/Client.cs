@@ -12,11 +12,24 @@ namespace _3Step
     /// <summary>
     /// Класс клиент
     /// </summary>
-    class Client: INotifyPropertyChanged, IEnumerable
+    class Client: INotifyPropertyChanged
     {
         int id;         //поле номера клиента
         int countOrder; //поле заказов
-        public ObservableCollection<Ride> observableCollectionRide = new ObservableCollection<Ride>();
+        public Ride Head;
+        public int ClientId { get => id; set => id = value; }
+        public int CountOrder
+        {
+            get => countOrder; set
+            {
+                countOrder = value;
+                OnPropertyChanged("Add/Delete");
+            }
+        }
+
+        public ObservableCollection<Ride> ObservableCollectionRide { get => observableCollectionRide; set => observableCollectionRide = value; }
+
+        private ObservableCollection<Ride> observableCollectionRide = new ObservableCollection<Ride>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,14 +39,6 @@ namespace _3Step
             CountOrder = 0;
             Head = new Ride(new DateTime(0001, 1, 1), 0);
         }
-        public int ClientId { get => id; set => id = value; }
-        public int CountOrder { get => countOrder; set
-            {
-                countOrder = value;
-                OnPropertyChanged("Add/Delete");
-            }
-        }
-        public Ride Head;
 
         public bool AddRide(DateTime dateTime, int price)//метод добавления поездки
         {
@@ -44,7 +49,7 @@ namespace _3Step
             if (countOrder == 0)
             {
                 Head.Next = newRide;
-                observableCollectionRide.Add(newRide);
+                ObservableCollectionRide.Add(newRide);
             }
             else
             {
@@ -66,15 +71,14 @@ namespace _3Step
                 if (check)
                 {
                     prev.Next = newRide;
-                    observableCollectionRide.Add(newRide);
-                    observableCollectionRide = new ObservableCollection<Ride>(observableCollectionRide.OrderBy(i => i.DateTime));
+                    ObservableCollectionRide.Add(newRide);
+                    ObservableCollectionRide = new ObservableCollection<Ride>(ObservableCollectionRide.OrderBy(i => i.DateTime));
                 }
             }
             CountOrder++;
             OnPropertyChanged("Add");
             return true;
         }
-
         public bool DeleteRide(DateTime dateTime)//метод удаления поездки
         {
             if (countOrder != 0)
@@ -87,7 +91,7 @@ namespace _3Step
                 else
                 {
                     current.Next = current.Next.Next;
-                    observableCollectionRide.Remove(FindRide(dateTime));
+                    ObservableCollectionRide.Remove(FindRide(dateTime));
                     OnPropertyChanged("Delete");
                     return true;
                 }
@@ -170,16 +174,6 @@ namespace _3Step
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            Ride current = Head;
-            while(current != null)
-            {
-                yield return current;
-                current = current.Next;
             }
         }
         public IEnumerable GetRides()

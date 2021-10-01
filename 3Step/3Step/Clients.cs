@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace _3Step
 {
+    
     class Clients
     {
         int _countClient;      //поле количества клиентов
@@ -32,7 +33,7 @@ namespace _3Step
             } 
         }
         public int SizeArray { get => _sizeArray; set => _sizeArray = value; }
-        internal Client[] ArrayClients { get => _arrayClients; set => _arrayClients = value; }
+        public Client[] ArrayClients { get => _arrayClients; set => _arrayClients = value; }
         public int LastClient { get => _lastClient; set => _lastClient = value; }
 
         public bool AddClient(int clientId)//метод добавления клиента
