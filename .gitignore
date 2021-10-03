@@ -3,3 +3,6 @@
 ################################################################################
 
 /3Step/3Step/obj/publish/win-x86
+/3Step/3Step/obj/Release/net5.0-windows
+/3Step/3Step/Properties/PublishProfiles
+/3Step/3Step/bin/Release/net5.0-windows
