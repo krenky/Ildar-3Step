@@ -64,7 +64,8 @@ namespace _3Step
         {
             Client client = DataClient.SelectedItem as Client;
             client = _clients.FindClient(client.ClientId);
-            client.AddRide((DateTime)DatePick.SelectedDate, Convert.ToInt32(Price_TextBox.Text));
+            client.AddRide((DateTime)DatePick.SelectedDate, Convert.ToInt32(Price_TextBox.Text), Convert.ToInt32(Time_TextBox.Text));
+            IEnumerable<Ride> rides = client.GetRides();
             DataRide.ItemsSource = client.GetRides();
         }
         /// <summary>
@@ -123,6 +124,8 @@ namespace _3Step
                     //_Enterprises
                     Clients clients = await JsonSerializer.DeserializeAsync<Clients>(fs);
                     _clients = new Clients(10);
+                    observClients = new ObservableCollection<Client>();
+                    DataClient.ItemsSource = observClients;
                     foreach (var i in clients.ArrayClients)
                     {
                         if (i != null)
@@ -130,7 +133,7 @@ namespace _3Step
                             Client client = new Client(i.ClientId);
                             foreach (Ride j in i.ObservableCollectionRide)
                             {
-                                client.AddRide(j.DateTime, j.Price);
+                                client.AddRide(j.DateTime, j.Price, j.Time);
                             }
                             _clients.AddClient(client);
                             observClients.Add(client);

@@ -15,17 +15,9 @@ namespace _3Step
     class Client: INotifyPropertyChanged
     {
         int id;         //поле номера клиента
-        int countOrder; //поле заказов
+        int CountOrder; //поле заказов
         public Ride Head;
         public int ClientId { get => id; set => id = value; }
-        public int CountOrder
-        {
-            get => countOrder; set
-            {
-                countOrder = value;
-                OnPropertyChanged("Add/Delete");
-            }
-        }
 
         public ObservableCollection<Ride> ObservableCollectionRide { get => observableCollectionRide; set => observableCollectionRide = value; }
 
@@ -37,16 +29,16 @@ namespace _3Step
         {
             ClientId = clientId;
             CountOrder = 0;
-            Head = new Ride(new DateTime(0001, 1, 1), 0);
+            Head = new Ride(new DateTime(0001, 1, 1), 0, 0);
         }
 
-        public bool AddRide(DateTime dateTime, int price)//метод добавления поездки
+        public bool AddRide(DateTime dateTime, int price, int time)//метод добавления поездки
         {
             bool check = true;
             Ride prev = Head;
             Ride current = Head.Next;
-            Ride newRide = new Ride(dateTime, price);
-            if (countOrder == 0)
+            Ride newRide = new Ride(dateTime, price, time);
+            if (CountOrder == 0)
             {
                 Head.Next = newRide;
                 ObservableCollectionRide.Add(newRide);
@@ -58,7 +50,7 @@ namespace _3Step
                     if (DateTime.Compare(newRide.DateTime, current.DateTime) < 0)
                     {
                         newRide.Next = current;
-                        prev.Next = current;
+                        prev.Next = newRide;
                         check = false;
                         break;
                     }
@@ -81,7 +73,7 @@ namespace _3Step
         }
         public bool DeleteRide(DateTime dateTime)//метод удаления поездки
         {
-            if (countOrder != 0)
+            if (CountOrder != 0)
             {
                 Ride current = FindPrevRide(dateTime);
                 if (current == null)
@@ -176,7 +168,7 @@ namespace _3Step
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        public IEnumerable GetRides()
+        public IEnumerable<Ride> GetRides()
         {
             Ride current = Head.Next;
             while (current != null)
@@ -184,6 +176,11 @@ namespace _3Step
                 yield return current;
                 current = current.Next;
             }
+        }
+        public List<Ride> ToList()
+        {
+            List<Ride> rides = new List<Ride>(GetRides());
+            return rides;
         }
     }
 }

@@ -14,12 +14,14 @@ namespace _3Step
     {
         DateTime _dateTime;//поле даты и времени
         int _price;        //поле цены поездки
+        int _time;
         Ride _next;        //поле ссылка на следующую поездку
 
-        public Ride(DateTime dateTime, int price)//конструктор
+        public Ride(DateTime dateTime, int price, int time)//конструктор
         {
             DateTime = dateTime;
             Price = price;
+            Time = time;
         }
 
         public DateTime DateTime { get => _dateTime; set => _dateTime = value; }
@@ -30,6 +32,9 @@ namespace _3Step
                 OnPropertyChanged("Price");
             }
         }
+
+        public int Time { get => _time; set => _time = value; }
+
         internal Ride Next { get => _next; set
             {
                 _next = value;
