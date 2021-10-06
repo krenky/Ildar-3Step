@@ -171,5 +171,18 @@ namespace _3Step
         {
             e.Handled = !(Char.IsDigit(e.Text, 0));
         }
+
+        private void Time_TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            {
+                if (e.Key == Key.Space)
+                    e.Handled = true;
+            }
+        }
+
+        private void Time_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !(Char.IsDigit(e.Text, 0));
+        }
     }
 }
