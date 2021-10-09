@@ -7,6 +7,9 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
+using System.IO;
+using System.Text.Json;
 
 namespace _3Step
 {
@@ -17,6 +20,7 @@ namespace _3Step
         Client[] _arrayClients;//поле массив клиентов
         int _sizeArray;        //поле размер массива
         int _lastClient;       //поле индекс последнего элемента(индекс первого элемента всегда равен 0)
+        public ObservableCollection<Client> observClients = new ObservableCollection<Client>();
 
         public Clients(int sizeArray)//конструктор
         {
@@ -42,6 +46,7 @@ namespace _3Step
             ArrayClients[CountClient] = client;
             CountClient++;
             LastClient++;
+            observClients.Add(client);
             if (CountClient == SizeArray)
             {
                 SizeArray *= 2;
@@ -55,6 +60,7 @@ namespace _3Step
             ArrayClients[CountClient] = client;
             CountClient++;
             LastClient++;
+            observClients.Add(client);
             if (CountClient == SizeArray)
             {
                 SizeArray *= 2;
@@ -72,6 +78,7 @@ namespace _3Step
                     ArrayClients[i - 1] = ArrayClients[i];
                 CountClient--;
                 LastClient--;
+                observClients.Remove(observClients.FirstOrDefault());
                 return true;
             }
             return false;
@@ -109,6 +116,43 @@ namespace _3Step
             }
             AllData += $"Сумма всех заказов{SumClients()}";
             return AllData;
+        }
+        public bool Save()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if ((bool)saveFileDialog.ShowDialog())
+                using (FileStream fs = (FileStream)saveFileDialog.OpenFile())
+                {
+                    JsonSerializer.Serialize<Clients>(new Utf8JsonWriter(fs), this);
+                    
+                }
+            return true;
+        }
+        public async void Load()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if ((bool)openFileDialog.ShowDialog())
+                using (FileStream fs = (FileStream)openFileDialog.OpenFile())
+                {
+                    //_Enterprises
+                    Clients clients = await JsonSerializer.DeserializeAsync<Clients>(fs);
+                    //_clients = new Clients(10);
+                    //observClients = new ObservableCollection<Client>();
+                    //DataClient.ItemsSource = observClients;
+                    foreach (var i in clients.ArrayClients)
+                    {
+                        if (i != null)
+                        {
+                            Client client = new Client(i.ClientId);
+                            foreach (Ride j in i.ObservableCollectionRide)
+                            {
+                                client.AddRide(j.DateTime, j.Price, j.Time);
+                            }
+                            AddClient(client);
+                            //observClients.Add(client);
+                        }
+                    }
+                }
         }
     }
 }

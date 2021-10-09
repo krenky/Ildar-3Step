@@ -27,7 +27,7 @@ namespace _3Step
         public MainWindow()
         {
             InitializeComponent();
-            DataClient.ItemsSource = observClients;
+            DataClient.ItemsSource = _clients.observClients;
             MessageBox.Show("Для добваления клиента:\n" +
                 "1: введите в поле id номер клиента\n" +
                 "2:нажмите кнопку добавить клиента\n\n" +
@@ -51,7 +51,7 @@ namespace _3Step
         {
             Client client = new Client(Convert.ToInt32(ClientId_TextBox.Text));
             _clients.AddClient(client);
-            observClients.Add(client);
+            //observClients.Add(client);
         }
         /// <summary>
         /// Удаление клиента
@@ -61,7 +61,7 @@ namespace _3Step
         private void Delete_Client_Click(object sender, RoutedEventArgs e)
         {
             _clients.DeleteClient();
-            observClients.Remove(observClients.FirstOrDefault());
+            //observClients.Remove(observClients.FirstOrDefault());
         }
         /// <summary>
         /// добавления поездки
@@ -111,43 +111,45 @@ namespace _3Step
         /// <param name="e"></param>
         private void Save_file_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            if ((bool)saveFileDialog.ShowDialog())
-                using (FileStream fs = (FileStream)saveFileDialog.OpenFile())
-                {
-                    JsonSerializer.Serialize<Clients>(new Utf8JsonWriter(fs), _clients);
-                }
+            //SaveFileDialog saveFileDialog = new SaveFileDialog();
+            //if ((bool)saveFileDialog.ShowDialog())
+            //    using (FileStream fs = (FileStream)saveFileDialog.OpenFile())
+            //    {
+            //        JsonSerializer.Serialize<Clients>(new Utf8JsonWriter(fs), _clients);
+            //    }
+            _clients.Save();
         }
         /// <summary>
         /// Обработчик загрузки файла сохраниения
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void Load_file_Click(object sender, RoutedEventArgs e)
+        private void Load_file_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if ((bool)openFileDialog.ShowDialog())
-                using (FileStream fs = (FileStream)openFileDialog.OpenFile())
-                {
-                    //_Enterprises
-                    Clients clients = await JsonSerializer.DeserializeAsync<Clients>(fs);
-                    _clients = new Clients(10);
-                    observClients = new ObservableCollection<Client>();
-                    DataClient.ItemsSource = observClients;
-                    foreach (var i in clients.ArrayClients)
-                    {
-                        if (i != null)
-                        {
-                            Client client = new Client(i.ClientId);
-                            foreach (Ride j in i.ObservableCollectionRide)
-                            {
-                                client.AddRide(j.DateTime, j.Price, j.Time);
-                            }
-                            _clients.AddClient(client);
-                            observClients.Add(client);
-                        }
-                    }
-                }
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            //if ((bool)openFileDialog.ShowDialog())
+            //    using (FileStream fs = (FileStream)openFileDialog.OpenFile())
+            //    {
+            //        //_Enterprises
+            //        Clients clients = await JsonSerializer.DeserializeAsync<Clients>(fs);
+            //        _clients = new Clients(10);
+            //        observClients = new ObservableCollection<Client>();
+            //        DataClient.ItemsSource = observClients;
+            //        foreach (var i in clients.ArrayClients)
+            //        {
+            //            if (i != null)
+            //            {
+            //                Client client = new Client(i.ClientId);
+            //                foreach (Ride j in i.ObservableCollectionRide)
+            //                {
+            //                    client.AddRide(j.DateTime, j.Price, j.Time);
+            //                }
+            //                _clients.AddClient(client);
+            //                observClients.Add(client);
+            //            }
+            //        }
+            //    }
+            _clients.Load();
         }
 
         private void ClientId_TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
